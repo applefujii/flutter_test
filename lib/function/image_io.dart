@@ -3,10 +3,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+/*
+  画像のセーブ、ロード
+ */
 class ImageIO {
 
   final ImagePicker picker = ImagePicker();
 
+  /*
+    画像をアルバムから選択する
+   */
   Future<File?> pickImage() async {
     File? image;
     final XFile? _image = await picker.pickImage(source: ImageSource.gallery);
@@ -17,6 +23,9 @@ class ImageIO {
     return image;
   }
 
+  /*
+    画像をアプリの保存領域に保存する
+   */
   Future<void> saveImage(File image) async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';
@@ -24,6 +33,9 @@ class ImageIO {
     image.copy(path + fileName);
   }
 
+  /*
+    画像をアプリの保存領域から読み込む
+   */
   Future<File?> loadImage() async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';

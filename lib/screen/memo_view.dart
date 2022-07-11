@@ -17,7 +17,7 @@ class _MemoViewScreenState extends State<MemoViewScreen> {
   final int memoId;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Memo memo = Memo(id:0, title: "aaa", text: "ooo");
+  Memo memo = Memo(id:0, title: "", text: "");
 
 
   @override

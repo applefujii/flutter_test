@@ -8,6 +8,10 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+
+/*
+ Memoのモデル + データベース操作
+ */
 class Memo {
 
   final int? id;
@@ -25,7 +29,14 @@ class Memo {
     };
   }
 
+
+  /////////////////////// 以下静的関数でデータベース操作を定義 ////////////////////////////////////////////////
+
+  /*
+    ゲッター。データベースに接続（なければテーブル作成）して戻す。
+   */
   static Future<Database> get database async {
+    //-- 関数。テーブルの作成
     FutureOr onCreate(db, value) async {
       db.execute('''
         CREATE TABLE memo(id INTEGER PRIMARY KEY, title TEXT, text TEXT)
@@ -62,6 +73,9 @@ class Memo {
     return _database;
   }
 
+  /*
+    メモを1件追加
+   */
   static Future<void> insertMemo(Memo memo) async {
     final Database db = await database;
     await db.insert(
@@ -71,6 +85,9 @@ class Memo {
     );
   }
 
+  /*
+    メモを全件取得
+   */
   static Future<List<Memo>> getMemos() async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query('memo');
@@ -83,6 +100,9 @@ class Memo {
     });
   }
 
+  /*
+    メモを1件取得
+   */
   static Future<Memo> getMemo(int id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query('memo', where: "id = ?", whereArgs: [id]);
@@ -93,6 +113,9 @@ class Memo {
     );
   }
 
+  /*
+    メモの更新
+   */
   static Future<void> updateMemo(Memo memo) async {
     final db = await database;
     await db.update(
@@ -104,6 +127,9 @@ class Memo {
     );
   }
 
+  /*
+    メモを1件削除
+   */
   static Future<void> deleteMemo(int id) async {
     final db = await database;
     await db.delete(

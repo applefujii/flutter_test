@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //-- ボトムナビゲーションバーで遷移する画面のクラス
   static const _screens = [
     MemoListScreen(),
     SecondScreen(),
@@ -44,8 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ImageLoadScreen(),
   ];
 
+  //-- 選択された画面番号
   int _selectedIndex = 0;
 
+  //-- 選択された画面番号を代入する （ボトムナビゲーションがタップされたとき
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -55,18 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _screens[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'お気に入り'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'お知らせ'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'アカウント'),
-          ],
-          type: BottomNavigationBarType.fixed,
-        ));
+      // メイン画面
+      body: _screens[_selectedIndex],
+      //-- ボトムナビゲーションバー
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'お気に入り'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: 'お知らせ'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'アカウント'),
+        ],
+        type: BottomNavigationBarType.fixed,
+      ));
   }
 }
