@@ -15,9 +15,7 @@ class ImageIO {
 
   final ImagePicker picker = ImagePicker();
 
-  /*
-    画像をアルバムから選択する
-   */
+  /// 画像をアルバムから選択する
   Future<File?> pickImage() async {
     File? image;
     final XFile? _image = await picker.pickImage(source: ImageSource.gallery);
@@ -28,9 +26,7 @@ class ImageIO {
     return image;
   }
 
-  /*
-    画像をアプリの保存領域に保存する
-   */
+  /// 画像をアプリの保存領域に保存する
   Future<void> saveImage(File image) async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';
@@ -38,9 +34,7 @@ class ImageIO {
     image.copy(path + fileName);
   }
 
-  /*
-    画像をアプリの保存領域から読み込む
-   */
+  /// 画像をアプリの保存領域から読み込む
   Future<File?> loadImage() async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';
@@ -50,6 +44,7 @@ class ImageIO {
     if(image.exists() == false) return null;
     return File(path + fileName);
   }
+
 
   /// グローバルキーの部分を画像(byteData)にする
   Future<ByteData> _exportGlobalKeyToImage(GlobalKey globalKey) async {

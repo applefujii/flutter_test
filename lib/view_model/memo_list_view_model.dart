@@ -5,8 +5,10 @@ import 'package:flutter_project/model/memo.dart';
 import 'package:flutter_project/utility/image_io.dart';
 
 
+// ViewModelの実体
 final memoListModelProvider = ChangeNotifierProvider((ref) => MemoListViewModel());
 
+// ViewModelは ChangeNotifierを継承
 class MemoListViewModel extends ChangeNotifier {
 
   final ImageIO imageIO = ImageIO();
@@ -16,9 +18,11 @@ class MemoListViewModel extends ChangeNotifier {
 
   MemoListViewModel() {
     loadMemos();
+    // これを呼ぶとviewが更新される
     notifyListeners();
   }
 
+  /// メモを全て読み込む
   Future<void> loadMemos() async {
     _isLoading = true;
     notifyListeners();
@@ -27,10 +31,12 @@ class MemoListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// スクリーンショットを撮ってシェア
   void shareScreenShot(GlobalKey shareKey) {
     imageIO.shareImageAndText("share", shareKey);
   }
 
+  //------------------- getter -------------------------
   List<Memo> get lMemo => _lMemo;
   bool get isLoading => _isLoading;
 

@@ -5,6 +5,9 @@ import 'package:flutter_project/view/memo_view.dart';
 import 'package:flutter_project/view/memo_add.dart';
 import 'package:flutter_project/view_model/memo_list_view_model.dart';
 
+/*
+* MVVMモデルを使用
+*/
 class MemoListView extends StatelessWidget {
   const MemoListView({Key? key}) : super(key: key);
 
@@ -22,6 +25,7 @@ class MemoListView extends StatelessWidget {
   }
 }
 
+// extends StatefulWidget ではなく ConsumerWidget
 class MemoListWidget extends ConsumerWidget {
   MemoListWidget({Key? key, required this.title}) : super(key: key);
 
@@ -30,6 +34,7 @@ class MemoListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ViewModelクラス
     final _viewModel = ref.watch(memoListModelProvider);
 
     return Scaffold(
@@ -45,15 +50,18 @@ class MemoListWidget extends ConsumerWidget {
       body: Center(
           child: Container(
             width: double.infinity,
+            // これで囲むと画面外も画像化できる
             child: SingleChildScrollView(
               primary: true,
               padding: const EdgeInsets.only(bottom: 82),
+              // RepaintBoundary以下が画像化される
               child: RepaintBoundary(
                 key: shareKey,
                 child: ListView.builder(
                   padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
                   itemCount: _viewModel.lMemo.length,
                   primary: false,
+                  // これを指定しないと縦の大きさが無限大になってしまう
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
