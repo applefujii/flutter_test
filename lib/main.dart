@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import 'package:flutter_project/screen/memo_list.dart';
-import 'package:flutter_project/screen/second_screen.dart';
-import 'package:flutter_project/screen/image_save.dart';
-import 'package:flutter_project/screen/image_load.dart';
+import 'package:flutter_project/view/memo_list.dart';
+import 'package:flutter_project/view/second_screen.dart';
+import 'package:flutter_project/view/image_save.dart';
+import 'package:flutter_project/view/image_load.dart';
 
 void main() {
   sqfliteFfiInit();
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,10 +41,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //-- ボトムナビゲーションバーで遷移する画面のクラス
   static const _screens = [
-    MemoListScreen(),
-    SecondScreen(),
-    ImageSaveScreen(),
-    ImageLoadScreen(),
+    MemoListView(),
+    SecondScreenView(),
+    ImageSaveView(),
+    ImageLoadView(),
   ];
 
   //-- 選択された画面番号
