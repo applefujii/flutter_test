@@ -56,8 +56,8 @@ class _ImageLoadWidgetState extends State<ImageLoadWidget> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           image = await imageIO.pickImage();
-          await imageIO.saveImage(image!);
           setState(() => {});
+          await imageIO.saveImage(image!);
         },
         tooltip: 'pick image',
         child: const Icon(Icons.add),

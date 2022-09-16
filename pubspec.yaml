@@ -35,6 +35,8 @@ dependencies:
   image_picker: any
   share_extend: any
   flutter_riverpod: any
+  flutter_image_compress: any
+
 
 
   # The following adds the Cupertino Icons font to your application.

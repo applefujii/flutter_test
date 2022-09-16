@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:flutter_project/view/memo_view.dart';
-import 'package:flutter_project/view/memo_add.dart';
+import 'package:flutter_project/view/memo_view_view.dart';
+import 'package:flutter_project/view/memo_add_view.dart';
 import 'package:flutter_project/view_model/memo_list_view_model.dart';
 
 /*

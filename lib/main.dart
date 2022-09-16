@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import 'package:flutter_project/view/memo_list.dart';
-import 'package:flutter_project/view/second_screen.dart';
-import 'package:flutter_project/view/image_save.dart';
-import 'package:flutter_project/view/image_load.dart';
+import 'package:flutter_project/view/memo_list_view.dart';
+import 'package:flutter_project/view/second_screen_view.dart';
+import 'package:flutter_project/view/image_save_view.dart';
+import 'package:flutter_project/view/image_load_view.dart';
 
 void main() {
   sqfliteFfiInit();
   // runApp(const MyApp());
-  runApp(ProviderScope(child: const MyApp()));
+  // MVVMモデル使用時はこちらを使う
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -67,11 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'お気に入り'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'お知らせ'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'アカウント'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'メモ'),
+          BottomNavigationBarItem(icon: Icon(Icons.exposure_plus_1), label: 'カウンター'),
+          BottomNavigationBarItem(icon: Icon(Icons.file_upload), label: '画像保存'),
+          BottomNavigationBarItem(icon: Icon(Icons.file_download), label: '画像読み込み'),
         ],
         type: BottomNavigationBarType.fixed,
       ));

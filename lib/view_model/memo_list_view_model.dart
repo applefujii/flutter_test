@@ -18,8 +18,6 @@ class MemoListViewModel extends ChangeNotifier {
 
   MemoListViewModel() {
     loadMemos();
-    // これを呼ぶとviewが更新される
-    notifyListeners();
   }
 
   /// メモを全て読み込む
@@ -28,6 +26,7 @@ class MemoListViewModel extends ChangeNotifier {
     notifyListeners();
     _lMemo = await Memo.getMemos();
     _isLoading = false;
+    // これを呼ぶとviewが更新される
     notifyListeners();
   }
 
