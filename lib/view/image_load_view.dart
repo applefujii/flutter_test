@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/utility/image_io.dart';
+import 'package:flutter_project/component/image_popup.dart';
 
 class ImageLoadView extends StatelessWidget {
   const ImageLoadView({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _ImageLoadWidgetState extends State<ImageLoadWidget> {
           width: double.infinity,
           child: image == null ?
           const Text('画像がありません')
-              : Image.file(image!, fit: BoxFit.cover),
+              : ImagePopup(image:image!),
         )
       ),
       floatingActionButton: FloatingActionButton(

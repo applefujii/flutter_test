@@ -33,8 +33,6 @@ class ImageIO {
     // 制限サイズ
     const maxSize = 3840;
 
-    // imgLib.Image img = imgLib.decodeImage(File(image.path).readAsBytesSync())!;
-
     // flutter_image_compressで指定サイズ／品質のjpegに圧縮
     Uint8List? result = await FlutterImageCompress.compressWithFile(
       image.absolute.path,
@@ -46,7 +44,7 @@ class ImageIO {
 
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';
-    print(path + fileName);
+    // print(path + fileName);
 
     // 保存
     File(path + fileName).writeAsBytesSync(result!);
@@ -56,9 +54,9 @@ class ImageIO {
   Future<File?> loadImage() async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
     String fileName = '1.jpg';
-    print(path + fileName);
+    // print(path + fileName);
     File image = await File(path + fileName);
-    print(image.exists());
+    // print(image.exists());
     if(image.exists() == false) return null;
     return File(path + fileName);
   }
