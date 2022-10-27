@@ -29,7 +29,7 @@ class ImageIO {
   }
 
   /// 画像をリサイズ、Jpeg形式に変換してアプリの保存領域に保存する
-  Future<void> saveImage(File image) async {
+  Future<String> saveImage(File image, String fileName) async {
     // 制限サイズ
     const maxSize = 3840;
 
@@ -43,17 +43,19 @@ class ImageIO {
     );
 
     String path = (await getApplicationDocumentsDirectory()).path + '/';
-    String fileName = '1.jpg';
+    fileName = fileName + ".jpg";
     // print(path + fileName);
 
     // 保存
     File(path + fileName).writeAsBytesSync(result!);
+    print("save out: ${path + fileName}");
+    return path + fileName;
   }
 
   /// 画像をアプリの保存領域から読み込む
-  Future<File?> loadImage() async {
+  Future<File?> loadImage(String fileName) async {
     String path = (await getApplicationDocumentsDirectory()).path + '/';
-    String fileName = '1.jpg';
+    print("load: ${path + fileName}");
     // print(path + fileName);
     File image = await File(path + fileName);
     // print(image.exists());

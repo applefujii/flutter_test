@@ -47,51 +47,49 @@ class MemoListWidget extends ConsumerWidget {
           )
         ],
       ),
-      body: Center(
-          child: Container(
-            width: double.infinity,
-            // これで囲むと画面外も画像化できる
-            child: SingleChildScrollView(
-              primary: true,
-              padding: const EdgeInsets.only(bottom: 82),
-              // RepaintBoundary以下が画像化される
-              child: RepaintBoundary(
-                key: shareKey,
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
-                  itemCount: _viewModel.lMemo.length,
-                  primary: false,
-                  // これを指定しないと縦の大きさが無限大になってしまう
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MemoViewView(memoId: _viewModel.lMemo[index].id ?? 0)),
-                        ).then((value) {
-                          _viewModel.loadMemos();
-                        });
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: const EdgeInsets.only(bottom: 6),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        alignment: Alignment.centerLeft,
-                        color: Colors.greenAccent,
-                        child: Text(
-                          _viewModel.lMemo[index].title,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    );
+      body: Container(
+        width: double.infinity,
+        // これで囲むと画面外も画像化できる
+        child: SingleChildScrollView(
+          primary: true,
+          padding: const EdgeInsets.only(bottom: 82),
+          // RepaintBoundary以下が画像化される
+          child: RepaintBoundary(
+            key: shareKey,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
+              itemCount: _viewModel.lMemo.length,
+              primary: false,
+              // これを指定しないと縦の大きさが無限大になってしまう
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MemoViewView(memoId: _viewModel.lMemo[index].id ?? 0)),
+                    ).then((value) {
+                      _viewModel.loadMemos();
+                    });
                   },
-                ),
-              ),
+                  child: Container(
+                    height: 50,
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    alignment: Alignment.centerLeft,
+                    color: Colors.greenAccent,
+                    child: Text(
+                      _viewModel.lMemo[index].title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          )
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

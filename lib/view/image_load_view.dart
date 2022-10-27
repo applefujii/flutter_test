@@ -51,12 +51,14 @@ class _ImageLoadWidgetState extends State<ImageLoadWidget> {
           width: double.infinity,
           child: image == null ?
           const Text('画像がありません')
-              : ImagePopup(image:image!),
+              : GestureDetector(
+                  child: ImagePopup(image:image!, text:"test")
+          )
         )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          image = await imageIO.loadImage();
+          image = await imageIO.loadImage("1.jpg");
           setState(() => {});
         },
         tooltip: 'load image',

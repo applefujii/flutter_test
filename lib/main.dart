@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/view/memories_image_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //-- ボトムナビゲーションバーで遷移する画面のクラス
   static const _screens = [
     MemoListView(),
-    SecondScreenView(),
+    MemoriesImageListView(),
     ImageSaveView(),
     ImageLoadView(),
   ];
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'メモ'),
-          BottomNavigationBarItem(icon: Icon(Icons.exposure_plus_1), label: 'カウンター'),
+          BottomNavigationBarItem(icon: Icon(Icons.image), label: '思い出の画像'),
           BottomNavigationBarItem(icon: Icon(Icons.file_upload), label: '画像保存'),
           BottomNavigationBarItem(icon: Icon(Icons.file_download), label: '画像読み込み'),
         ],

@@ -57,7 +57,7 @@ class _ImageLoadWidgetState extends State<ImageLoadWidget> {
         onPressed: () async {
           image = await imageIO.pickImage();
           setState(() => {});
-          await imageIO.saveImage(image!);
+          await imageIO.saveImage(image!, "1");
         },
         tooltip: 'pick image',
         child: const Icon(Icons.add),

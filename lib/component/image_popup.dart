@@ -1,32 +1,33 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class ImagePopup extends StatefulWidget {
-  const ImagePopup({Key? key, required this.image, this.thumbnail, this.text}) : super(key: key);
+  const ImagePopup({Key? key, required this.image, this.text}) : super(key: key);
 
-  final File image;
-  final File? thumbnail;
+  final File? image;
   final String? text;
 
   @override
-  State<ImagePopup> createState() => _ImagePopupState(image, thumbnail, text);
+  State<ImagePopup> createState() => _ImagePopupState(image, text);
 }
 
 class _ImagePopupState extends State<ImagePopup> {
-  _ImagePopupState(this.image, this.thumbnail, this.text);
+  _ImagePopupState(this.image, this.text);
 
-  final File image;
-  final File? thumbnail;
+  final File? image;
   final String? text;
 
   bool _isInfoVisible = false;
 
   @override
   Widget build(BuildContext context) {
+    if(image == null ) {
+      return Container();
+    }
     return GestureDetector(
-      child: Image.file(thumbnail ?? image, fit: BoxFit.cover),
+      child: Image.file(image!, fit: BoxFit.cover),
       onTap: () {
-        setState( (){ _isInfoVisible = !_isInfoVisible; } );
+        setState( (){ _isInfoVisible = true; } );
         showGeneralDialog(
           transitionDuration: const Duration(milliseconds: 1000),
           barrierDismissible: true,
@@ -41,58 +42,56 @@ class _ImagePopupState extends State<ImagePopup> {
                       .primaryTextTheme
                       .bodyText1!,
                   child: SafeArea(
-                    child: Container(
-                      child: Center(
-                        child: Material(
-                          color: const Color(0x00000000),
-                          child: Stack(
-                            children: <Widget>[
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width,
-                                child: GestureDetector(
-                                  child: InteractiveViewer(
-                                    minScale: 0.1,
-                                    maxScale: 5,
-                                    child: Image.file(image),
+                    child: Center(
+                      child: Material(
+                        color: const Color(0x00000000),
+                        child: Stack(
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              child: GestureDetector(
+                                child: InteractiveViewer(
+                                  minScale: 0.1,
+                                  maxScale: 5,
+                                  child: Image.file(image!),
+                                ),
+                                onTap: () {
+                                  setState( (){ _isInfoVisible = !_isInfoVisible; } );
+                                },
+                              ),
+                            ),
+                            Visibility(
+                              visible: _isInfoVisible,
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 128,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: const Color(0xDD99AA99),
+                                  child: Text(
+                                    text ?? "説明文なし。",
+                                    style: const TextStyle(color: Color(0xFFFFFFFF)),
                                   ),
-                                  onTap: () {
-                                    setState( (){ _isInfoVisible = !_isInfoVisible; } );
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: _isInfoVisible,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Color(0xAAFFFFFF),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
                                   },
                                 ),
                               ),
-                              Visibility(
-                                visible: _isInfoVisible,
-                                child: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    height: 128,
-                                    width: MediaQuery.of(context).size.width,
-                                    color: const Color(0xDD99AA99),
-                                    child: Text(
-                                      text ?? "説明文なし。",
-                                      style: const TextStyle(color: Color(0xFFFFFFFF)),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: _isInfoVisible,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xAAFFFFFF),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.close),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ]
-                          ),
+                            ),
+                          ]
                         ),
                       ),
                     ),

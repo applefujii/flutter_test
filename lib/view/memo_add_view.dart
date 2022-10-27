@@ -72,8 +72,8 @@ class _MemoFormWidgetState extends State<MemoFormWidget> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
-                onPressed: () {
-                  insertMemo();
+                onPressed: () async {
+                  await insertMemo();
                   Navigator.pop(context);
                   if (_formKey.currentState!.validate()) {
                     // Process data.
